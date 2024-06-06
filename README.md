@@ -83,7 +83,7 @@ public class Main {
 
 class Client {
     static int numberOfClients = 0;
-    private String id; //  OR SHOUD WE PUT INTEGER???????
+    private String id; //  OR SHOUD WE PUT INTEGER??????? / I think it doesn't metter becouse we don't do math with it
     private String name;
     private List<Account> accounts;
 
