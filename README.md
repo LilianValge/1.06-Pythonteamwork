@@ -75,13 +75,14 @@ for client in clients:
 
 ```java
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
-import java.text.SimpleDateFormat;
 
 class Client {
-    private static int numberOfClients = 0;
-    private String id, name;
-    private ArrayList<Account> accounts;
+    static int numberOfClients = 0;
+    private String id;
+    private String name;
+    private List<Account> accounts;
 
     public Client(String id, String name) {
         this.id = id;
@@ -93,24 +94,13 @@ class Client {
     public void addAccount(Account account) {
         accounts.add(account);
     }
-
-    public static int getNumberOfClients() {
-        return numberOfClients;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public ArrayList<Account> getAccounts() {
-        return accounts;
-    }
 }
 
 class Account {
-    private String number, currency;
+    private String number;
+    private String currency;
     private double balance;
-    private ArrayList<Transaction> transactions;
+    private List<Transaction> transactions;
 
     public Account(String number, String currency, double balance) {
         this.number = number;
@@ -132,52 +122,25 @@ class Account {
         transactions.add(new Transaction(currency, -amount, note));
         balance -= amount;
     }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    public ArrayList<Transaction> getTransactions() {
-        return transactions;
-    }
 }
 
 class Transaction {
-    private String currency, note, timeStamp;
+    private String currency;
     private double amount;
+    private String note;
+    private Date timeStamp;
 
     public Transaction(String currency, double amount, String note) {
         this.currency = currency;
         this.amount = amount;
         this.note = note;
-        this.timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public String getTimeStamp() {
-        return timeStamp;
+        this.timeStamp = new Date();
     }
 }
 
-public class BankSystem {
+public class Main {
     public static void main(String[] args) {
-        ArrayList<Client> clients = new ArrayList<>();
-
+        List<Client> clients = new ArrayList<>();
         clients.add(new Client("123456", "Anna"));
         clients.add(new Client("987654", "Oskar"));
         clients.add(new Client("456123", "Jenifer"));
@@ -193,8 +156,7 @@ public class BankSystem {
         clients.get(0).getAccounts().get(0).makeWithdrawal(140, "Clothes");
         clients.get(0).getAccounts().get(0).makeWithdrawal(20, "Dinner");
 
-        System.out.println("We have " + Client.getNumberOfClients() + " clients in our bank:");
-
+        System.out.println("We have " + Client.numberOfClients + " clients in our bank:");
         for (Client client : clients) {
             System.out.println("Client " + client.getName() + " has the following accounts:");
             for (Account account : client.getAccounts()) {
