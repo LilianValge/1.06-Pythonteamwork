@@ -80,19 +80,18 @@ import java.text.SimpleDateFormat;
 
 class Client {
     private static int numberOfClients = 0;
-    private String id;
-    private String name;
+    private String id, name;
     private ArrayList<Account> accounts;
 
     public Client(String id, String name) {
         this.id = id;
         this.name = name;
         this.accounts = new ArrayList<>();
-        Client.numberOfClients++;
+        numberOfClients++;
     }
 
     public void addAccount(Account account) {
-        this.accounts.add(account);
+        accounts.add(account);
     }
 
     public static int getNumberOfClients() {
@@ -109,8 +108,7 @@ class Client {
 }
 
 class Account {
-    private String number;
-    private String currency;
+    private String number, currency;
     private double balance;
     private ArrayList<Transaction> transactions;
 
@@ -126,13 +124,13 @@ class Account {
     }
 
     public void makeDeposit(double amount, String note) {
-        this.transactions.add(new Transaction(this.currency, amount, note));
-        this.balance += amount;
+        transactions.add(new Transaction(currency, amount, note));
+        balance += amount;
     }
 
     public void makeWithdrawal(double amount, String note) {
-        this.transactions.add(new Transaction(this.currency, -amount, note));
-        this.balance -= amount;
+        transactions.add(new Transaction(currency, -amount, note));
+        balance -= amount;
     }
 
     public String getNumber() {
@@ -153,10 +151,8 @@ class Account {
 }
 
 class Transaction {
-    private String currency;
+    private String currency, note, timeStamp;
     private double amount;
-    private String note;
-    private String timeStamp;
 
     public Transaction(String currency, double amount, String note) {
         this.currency = currency;
@@ -171,10 +167,6 @@ class Transaction {
 
     public double getAmount() {
         return amount;
-    }
-
-    public String getNote() {
-        return note;
     }
 
     public String getTimeStamp() {
